@@ -126,10 +126,12 @@ function csv2ChartData(jsondata, select) {
 function type2op(select, ctx, ChartData) {
     let type = "";
     let myChart;
+    let mytype;
     let myoption = {};
     switch (select.value) {
         case "pie":
             myoption = OPTION_PIE;
+            mytype = "pie";
             myChart = new Chart(ctx, {
                 type: "pie",
                 data: ChartData,
@@ -138,6 +140,7 @@ function type2op(select, ctx, ChartData) {
             break;
         case "bar":
             myoption = OPTION_BAR;
+            mytype = "bar";
             myChart = new Chart(ctx, {
                 type: "bar",
                 data: ChartData,
@@ -146,6 +149,7 @@ function type2op(select, ctx, ChartData) {
             break;
         case "horizontalBar":
             myoption = OPTION_HORIZONTAL_BAR;
+            mytype = "bar";
             myChart = new Chart(ctx, {
                 type: "bar",
                 data: ChartData,
@@ -154,6 +158,7 @@ function type2op(select, ctx, ChartData) {
             break;
         default:
             myoption = OPTION_PIE;
+            mytype = "pie";
             myChart = new Chart(ctx, {
                 type: "pie",
                 data: ChartData,
@@ -161,7 +166,7 @@ function type2op(select, ctx, ChartData) {
             });
             break;
     }
-    return { chart: myChart, myoption: myoption };
+    return { chart: myChart, myoption: myoption, mytype: mytype };
 }
 
 const acc__template =
@@ -212,10 +217,11 @@ export default {
             }
             let myChart = type2op(optiontype, domchart, ChartData);
             let myoption = myChart["myoption"];
+            let mytype = myChart["mytype"];
             let textChartData = JSON.stringify(ChartData);
             let textOption = JSON.stringify(myoption);
             let codecontent = `new Chart($("#cha"), {
-                type: "${optiontype.value}",
+                type: "${mytype}",
                 data: ${textChartData},
                 options:${textOption},
             });`;
