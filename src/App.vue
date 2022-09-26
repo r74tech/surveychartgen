@@ -5,6 +5,5 @@ import Chartcodegen from './components/Chartcodegen.vue';
 </script>
 
 <template>
-
   <Chartcodegen/>
 </template>
