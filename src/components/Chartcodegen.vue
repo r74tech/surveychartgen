@@ -170,7 +170,7 @@ function type2op(select, ctx, ChartData) {
 }
 
 const acc__template =
-    `
+`
             <div class="accordion-item">
                 <h2 class="accordion-header" id="acc{{cout__m}}--{{cout__s}}">
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#col{{cout__m}}--{{cout__s}}" aria-expanded="false" aria-controls="col{{cout__m}}--{{cout__s}}">
@@ -184,9 +184,59 @@ const acc__template =
                 </div>
             </div>
 ` +
-    `            <script>\n` +
-    `            {{script}}` +
-    `\n            <\/script>`;
+`            <script>\n` +
+`            {{script}}` +
+`\n            <\/script>`;
+
+const tab__template =
+    `
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="acc{{cout__m}}--{{cout__s}}">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#col{{cout__m}}--{{cout__s}}" aria-expanded="false" aria-controls="col{{cout__m}}--{{cout__s}}">
+                        <strong>{{cout__s}}. {{title}}</strong>
+                    </button>
+                </h2>
+                <div id="col{{cout__m}}--{{cout__s}}" class="accordion-collapse collapse" aria-labelledby="acc{{cout__m}}--{{cout__s}}" data-bs-parent="#acc{{cout__m}}">
+                    <div class="accordion-body">
+                        <ul class="nav nav-tabs" id="tabc1-1" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link active" data-bs-toggle="tab" href="#tab{{cout__m}}--{{cout__s}}-1" id="tab{{cout__m}}--{{cout__s}}-1-tab" role="tab">全体</a>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link" data-bs-toggle="tab" href="#tab{{cout__m}}--{{cout__s}}-2" id="tab{{cout__m}}--{{cout__s}}-2-tab" role="tab">メンバー</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-bs-toggle="tab" href="#tab{{cout__m}}--{{cout__s}}-3" id="tab{{cout__m}}--{{cout__s}}-3-tab" role="tab">非メンバー</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="myTabContent1">
+                            <div aria-labelledby="tab{{cout__m}}--{{cout__s}}-1-tab" class="tab-pane fade show active" id="tab{{cout__m}}--{{cout__s}}-1" role="tabpanel">
+                                <div class="chart-wrapper">
+                                    <canvas id="cha{{cout__m}}--{{cout__s}}-1"></canvas>
+                                </div>
+                            </div>
+                            <div aria-labelledby="tab{{cout__m}}--{{cout__s}}-2-tab" class="tab-pane fade" id="tab{{cout__m}}--{{cout__s}}-2" role="tabpanel">
+                                <div class="chart-wrapper">
+                                    <canvas id="cha{{cout__m}}--{{cout__s}}-2"></canvas>
+                                </div>
+                            </div>
+                            <div aria-labelledby="tab{{cout__m}}--{{cout__s}}-3-tab" class="tab-pane fade" id="tab{{cout__m}}--{{cout__s}}-3" role="tabpanel">
+                                <div class="chart-wrapper">
+                                    <canvas id="cha{{cout__m}}--{{cout__s}}-3"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+` +
+`            <script>\n` +
+`            {{script}}` +
+`\n            <\/script>`+
+`<script>\n` +
+`            <\/script>`+
+`<script>\n` +
+`            <\/script>`;
 // buttonが押されたときに関数を実行する
 export default {
     setup() {
@@ -213,7 +263,10 @@ export default {
             const data = csvparse(csv);
             const ChartData = csv2ChartData(data, optiontype);
             if (color.value) {
-                ChartData.datasets[0].backgroundColor = color.value.replace(/\s/g,"").replace(/\"/g,"").split(",");
+                ChartData.datasets[0].backgroundColor = color.value
+                    .replace(/\s/g, "")
+                    .replace(/\"/g, "")
+                    .split(",");
             }
             let myChart = type2op(optiontype, domchart, ChartData);
             let myoption = myChart["myoption"];
@@ -238,6 +291,10 @@ export default {
                     templatetype = acc__template;
                     t_type = 1;
                     break;
+                case "tab":
+                    templatetype = tab__template;
+                    t_type = 2;
+                    break;
                 default:
                     templatetype = acc__template;
                     t_type = -1;
@@ -259,12 +316,14 @@ export default {
                 case 1:
                     code.value = template;
                     break;
+                case 2:
+                    code.value = template;
+                    break;
                 case -1:
                     code.value = codecontent;
                     break;
             }
 
-            
             // cout__sの値を1増やす
             cout__s.value = (parseInt(cout__s.value) + 1).toString();
         };
@@ -299,6 +358,7 @@ export default {
                     <select id="usetemplate">
                         <option>template None</option>
                         <option selected value="acc">accordion-item</option>
+                        <option value="tab">tab</option>
                     </select>
                 </span>
             </p>
@@ -310,7 +370,7 @@ export default {
             </p>
             <p class="control columns">
                 <label for="color">色:</label>
-                <input id="color" class="input column is-four-fifths" type="text" placeholder='"#96f2d7", "#0ca678",'  name="color" />
+                <input id="color" class="input column is-four-fifths" type="text" placeholder='"#96f2d7", "#0ca678",' name="color" />
             </p>
         </div>
         <div class="highlight">
