@@ -76,7 +76,7 @@
             {{script}}
             <\/script><script>
             <\/script><script>
-            <\/script>`,Qm={setup(){return{generate:()=>{const t=document.getElementById("csv");if(!t.value)return;const i=document.getElementById("ChartType");document.getElementById("chart-container");let n=Me.getChart("Chart");n!=null&&n.destroy();const s=document.getElementById("Chart"),o=document.getElementById("color"),r=qm(t),a=Zm(r,i);o.value&&(a.datasets[0].backgroundColor=o.value.replace(/\s/g,"").replace(/\"/g,"").split(","));let l=Jm(i,s,a),c=l.myoption,h=l.mytype,f=a.datasets[0].label;a.datasets[0].label="\u56DE\u7B54\u6570";let u=JSON.stringify(a),d=JSON.stringify(c),g=document.getElementById("cout__m"),p=document.getElementById("cout__s"),b=`new Chart($("#cha"), {
+            <\/script>`,Qm={setup(){return{generate:()=>{const t=document.getElementById("csv");if(!t.value)return;const i=document.getElementById("ChartType");document.getElementById("chart-container");let n=Me.getChart("Chart");n!=null&&n.destroy();const s=document.getElementById("Chart"),o=document.getElementById("color"),r=qm(t),a=Zm(r,i);o.value&&(a.datasets[0].backgroundColor=o.value.replace(/\s/g,"").replace(/\"/g,"").split(","));let l=Jm(i,s,a),c=l.myoption,h=l.mytype,f=a.datasets[0].label;a.datasets[0].label="\u56DE\u7B54\u6570",console.log(a);let u=JSON.stringify(a),d=JSON.stringify(c),g=document.getElementById("cout__m"),p=document.getElementById("cout__s"),b=`new Chart($("#cha"), {
                 type: "${h}",
                 data: ${u},
                 options:${d},
