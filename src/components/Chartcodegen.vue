@@ -287,6 +287,7 @@ export default {
             let cout__m = document.getElementById("cout__m") as HTMLInputElement;
             let cout__s = document.getElementById("cout__s") as HTMLInputElement;
             let title = ChartData["datasets"][0]["label"];
+            ChartData["datasets"][0]["label"] = "回答数";
             let templatetype, t_type;
             switch (usetemplate.value) {
                 case "acc":
