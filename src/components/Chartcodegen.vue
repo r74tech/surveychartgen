@@ -273,12 +273,12 @@ export default {
             let myChart = type2op(optiontype, domchart, ChartData);
             let myoption = myChart["myoption"];
             let mytype = myChart["mytype"];
+            let title = ChartData["datasets"][0]["label"];
+            ChartData["datasets"][0]["label"] = "回答数";
             let textChartData = JSON.stringify(ChartData);
             let textOption = JSON.stringify(myoption);
             let cout__m = document.getElementById("cout__m") as HTMLInputElement;
             let cout__s = document.getElementById("cout__s") as HTMLInputElement;
-            let title = ChartData["datasets"][0]["label"];
-            ChartData["datasets"][0]["label"] = "回答数";
             let codecontent = `new Chart($("#cha"), {
                 type: "${mytype}",
                 data: ${textChartData},
