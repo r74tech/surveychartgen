@@ -24,7 +24,9 @@
                 </h2>
                 <div id="col{{cout__m}}--{{cout__s}}" class="accordion-collapse collapse" aria-labelledby="acc{{cout__m}}--{{cout__s}}" data-bs-parent="#acc{{cout__m}}">
                     <div class="accordion-body">
-                        <canvas id="cha{{cout__m}}--{{cout__s}}"></canvas>
+                        <div class="chart-wrapper">
+                            <canvas id="cha{{cout__m}}--{{cout__s}}"></canvas>
+                        </div>
                     </div>
                 </div>
             </div>
