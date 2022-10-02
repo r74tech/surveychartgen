@@ -209,7 +209,7 @@ const tab__template =
                                 <a class="nav-link" data-bs-toggle="tab" href="#tab{{cout__m}}--{{cout__s}}-3" id="tab{{cout__m}}--{{cout__s}}-3-tab" role="tab">非メンバー</a>
                             </li>
                         </ul>
-                        <div class="tab-content" id="myTabContent1">
+                        <div class="tab-content">
                             <div aria-labelledby="tab{{cout__m}}--{{cout__s}}-1-tab" class="tab-pane fade show active" id="tab{{cout__m}}--{{cout__s}}-1" role="tabpanel">
                                 <div class="chart-wrapper">
                                     <canvas id="cha{{cout__m}}--{{cout__s}}-1"></canvas>
